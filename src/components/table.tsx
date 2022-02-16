@@ -19,17 +19,20 @@ const PageTable = (props: any) => {
     //   width: 100,
     // },
   ];
-  // const difference = () ={
-  //   setDiff()
-  // }
+
   useEffect(() => {
+    // if (props.click === true) {
+    console.log("button worked");
     fetch("")
       .then((data) => data.json())
       .then((data) => setTableData(data));
+    // }
   }, []);
+
   return (
     <>
       <div className="tables">
+        { (props.click===true)? 
         <DataGrid
           rows={tableData}
           columns={columns}
@@ -37,7 +40,23 @@ const PageTable = (props: any) => {
           components={{
             Toolbar: GridToolbar,
           }}
+          initialState={{
+            filter: {
+              filterModel: {
+                items: [
+                  {
+                    columnField: "date",
+                    id: "70958",
+                    operatorValue: "equals",
+                    value: props.value[0],
+                  },
+                ],
+              },
+            },
+          }}
         />
+        : <></>
+       } 
       </div>
     </>
   );

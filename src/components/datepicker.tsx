@@ -11,11 +11,11 @@ import { PageTable } from ".";
 
 export default function DatePicker(props:any) {
   const [value, setValue] = React.useState<DateRange<Date>>([null, null]);
+  const [click, setClick] = React.useState(false)
 
   function generateReport(value:any) {
-    return(
-      console.log(value)
-    )}
+    setClick(true)  
+  }
 
   return (
     <>
@@ -30,9 +30,9 @@ export default function DatePicker(props:any) {
           }}
           renderInput={(startProps: any, endProps: any) => (
             <React.Fragment>
-              <TextField elevation={1} {...startProps} />
+              <TextField autoComplete="off" elevation={1} {...startProps} />
               <Box sx={{ mx: 2 }}> to </Box>
-              <TextField elevation={1} {...endProps} />
+              <TextField autoComplete="off" elevation={1} {...endProps} />
             </React.Fragment>
           )}
         />
@@ -41,7 +41,10 @@ export default function DatePicker(props:any) {
         Generate Report
       </Button>
       </div>
-      <PageTable value={value}/>
+      <PageTable 
+        value={value}
+        click={click}
+      />
     </>
   );
 }
